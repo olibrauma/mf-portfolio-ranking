@@ -1,3 +1,5 @@
+![](mf-portfolio-ranking.png)
+
 # MF Portfolio Ranking Pro 仕様書
 
 ## 1. プロジェクト概要
