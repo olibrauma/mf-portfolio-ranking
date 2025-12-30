@@ -19,6 +19,7 @@
     ],
     "browser_specific_settings": {
         "gecko": {
-            "id": "mf-asset-share-chart@your-domain.com"
+            "id": "mf-asset-share-chart@example.com"
         }
     }
+}
