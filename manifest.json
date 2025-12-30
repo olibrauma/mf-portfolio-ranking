@@ -16,5 +16,9 @@
             ],
             "run_at": "document_idle"
         }
-    ]
-}
+    ],
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "mf-asset-share-chart@your-domain.com"
+        }
+    }
