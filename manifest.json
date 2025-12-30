@@ -1,11 +1,7 @@
 {
     "manifest_version": 3,
     "name": "MF Portfolio Ranking Pro",
-    "version": "1.0",
-    "description": "マネーフォワードの資産構成をドリルダウン付きのランキング形式に変換します。",
-    "permissions": [
-        "activeTab"
-    ],
+    "version": "1.1",
     "content_scripts": [
         {
             "matches": [
@@ -13,6 +9,9 @@
             ],
             "js": [
                 "content.js"
+            ],
+            "css": [
+                "style.css"
             ],
             "run_at": "document_idle"
         }

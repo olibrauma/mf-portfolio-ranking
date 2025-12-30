@@ -1,0 +1,118 @@
+/* メインコンテナ */
+#custom-bar-chart {
+    background: #fff;
+    padding: 30px;
+    margin-bottom: 40px;
+    border-radius: 16px;
+    font-family: sans-serif;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    color: #333;
+}
+
+.chart-header {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.asset-row {
+    margin-bottom: 24px;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* レイアウト：左側に名称、右側に数値 */
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 名称の省略設定 */
+.name-text {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 15px;
+    font-size: 13px;
+}
+
+/* 数値エリアの固定幅 */
+.val-area {
+    display: flex;
+    justify-content: flex-end;
+    width: 220px;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.val-text {
+    text-align: right;
+    font-family: monospace;
+    flex: 1;
+}
+
+.pct-text {
+    text-align: right;
+    width: 60px;
+    font-weight: 700;
+}
+
+/* プログレスバー */
+.progress-bg {
+    background: #f0f2f5;
+    border-radius: 100px;
+    height: 10px;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 100px;
+    transition: width 0.5s ease;
+}
+
+/* ドリルダウン（詳細） */
+.detail-box {
+    margin-top: 12px;
+    padding-left: 26px;
+    display: none;
+}
+
+.detail-item {
+    position: relative;
+    padding: 10px 0 6px 0;
+}
+
+.mini-bar-bg {
+    width: 100%;
+    height: 2px;
+    background: #f0f0f0;
+    margin-top: 4px;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.mini-bar-fill {
+    height: 100%;
+    opacity: 0.6;
+}
+
+/* 矢印 */
+.arrow {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 0 5px 8.7px;
+    border-color: transparent transparent transparent #ccc;
+    transition: transform 0.2s;
+    margin-right: 10px;
+}
+
+.arrow.open {
+    transform: rotate(90deg);
+}
