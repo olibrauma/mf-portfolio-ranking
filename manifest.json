@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "MF Portfolio Ranking",
+    "name": "MF Portfolio Ranking Pro",
     "version": "1.0",
-    "description": "資産構成を金額順の横棒グラフに変換し、ドリルダウンを可能にします。",
+    "description": "マネーフォワードの資産構成をドリルダウン付きのランキング形式に変換します。",
     "permissions": [
         "activeTab"
     ],
@@ -19,7 +19,7 @@
     ],
     "browser_specific_settings": {
         "gecko": {
-            "id": "mf-asset-share-chart@example.com"
+            "id": "mf-ranking-pro@example.com"
         }
     }
 }
