@@ -2,9 +2,13 @@ const injectChart = () => {
     // Firefoxのサンドボックス制限を越えてデータにアクセス
     const rawData = window.wrappedJSObject?.assetClassRatio;
 
-    if (!rawData || document.getElementById('custom-bar-chart')) return;
+    // データがない、または既に描画済みの場合は何もしない
+    if (!rawData || document.getElementById('custom-bar-chart')) return false;
 
     const grandTotal = Array.from(rawData).reduce((sum, item) => sum + item.y, 0);
+
+    // データが0（読み込み中）の場合もスキップ
+    if (grandTotal === 0) return false;
 
     const today = new Date();
     const formattedDate = `${today.getFullYear()}/${String(today.getMonth() + 1).padStart(2, '0')}/${String(today.getDate()).padStart(2, '0')}`;
@@ -145,10 +149,23 @@ const injectChart = () => {
     });
 
     const main = document.getElementById('main-container');
-    if (main) main.prepend(chartContainer);
-    const pie = document.getElementById('container_portfolio_pie');
-    if (pie) pie.style.display = 'none';
+    if (main) {
+        main.prepend(chartContainer);
+        const pie = document.getElementById('container_portfolio_pie');
+        if (pie) pie.style.display = 'none';
+        return true; // 成功
+    }
+    return false;
 };
 
-// データの読み込み完了を待って実行
-setTimeout(injectChart, 1000);
+// --- 監視ロジック：ページの変化を検知して即実行 ---
+const observer = new MutationObserver(() => {
+    if (injectChart()) {
+        observer.disconnect(); // 一度成功したら監視を止める
+    }
+});
+
+observer.observe(document.body, { childList: true, subtree: true });
+
+// 初回チェック（既にDOMがある場合）
+injectChart();
