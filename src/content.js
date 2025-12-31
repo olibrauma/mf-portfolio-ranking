@@ -43,7 +43,19 @@ const injectChart = () => {
 
     const infoRow = document.createElement('div');
     infoRow.style.cssText = 'display:flex; justify-content:space-between; margin-top:8px; font-size:14px; color:#666;';
-    infoRow.innerHTML = `<span>資産総額: <strong>${grandTotal.toLocaleString()}円</strong></span><span>${formattedDate} 時点</span>`;
+    infoRow.style.cssText = 'display:flex; justify-content:space-between; margin-top:8px; font-size:14px; color:#666;';
+
+    const totalSpan = document.createElement('span');
+    totalSpan.textContent = '資産総額: ';
+    const strongTotal = document.createElement('strong');
+    strongTotal.textContent = `${grandTotal.toLocaleString()}円`;
+    totalSpan.appendChild(strongTotal);
+
+    const dateSpan = document.createElement('span');
+    dateSpan.textContent = `${formattedDate} 時点`;
+
+    infoRow.appendChild(totalSpan);
+    infoRow.appendChild(dateSpan);
 
     header.appendChild(title);
     header.appendChild(infoRow);
@@ -59,15 +71,39 @@ const injectChart = () => {
         const mainFlex = document.createElement('div');
         mainFlex.className = 'flex-between';
         mainFlex.style.alignItems = 'flex-end';
-        mainFlex.innerHTML = `
-            <div style="display:flex; align-items:center; flex:1; overflow:hidden;">
-                <span id="arr-${i}" class="arrow"></span>
-                <span class="name-text" style="font-weight:600; font-size:15px;">${item.name}</span>
-            </div>
-            <div class="val-area">
-                <span class="val-text">${item.y.toLocaleString()}円</span>
-                <span class="pct-text">${classPct}%</span>
-            </div>`;
+        mainFlex.style.alignItems = 'flex-end';
+
+        const nameContainer = document.createElement('div');
+        nameContainer.style.cssText = "display:flex; align-items:center; flex:1; overflow:hidden;";
+
+        const arrow = document.createElement('span');
+        arrow.id = `arr-${i}`;
+        arrow.className = 'arrow';
+
+        const nameText = document.createElement('span');
+        nameText.className = 'name-text';
+        nameText.style.cssText = "font-weight:600; font-size:15px;";
+        nameText.textContent = item.name;
+
+        nameContainer.appendChild(arrow);
+        nameContainer.appendChild(nameText);
+
+        const valArea = document.createElement('div');
+        valArea.className = 'val-area';
+
+        const valText = document.createElement('span');
+        valText.className = 'val-text';
+        valText.textContent = `${item.y.toLocaleString()}円`;
+
+        const pctText = document.createElement('span');
+        pctText.className = 'pct-text';
+        pctText.textContent = `${classPct}%`;
+
+        valArea.appendChild(valText);
+        valArea.appendChild(pctText);
+
+        mainFlex.appendChild(nameContainer);
+        mainFlex.appendChild(valArea);
 
         const progressBg = document.createElement('div');
         progressBg.className = 'progress-bg';
@@ -84,12 +120,42 @@ const injectChart = () => {
         details.forEach(d => {
             const dItem = document.createElement('div');
             dItem.className = 'detail-item';
-            dItem.innerHTML = `
-                <div class="flex-between">
-                    <div class="name-text">${d.name} <span style="color:#999; font-size:11px;">${d.sub}</span></div>
-                    <div class="val-area"><div class="val-text">${d.valStr}</div><div class="pct-text" style="color:#888;">${d.pct}%</div></div>
-                </div>
-                <div class="mini-bar-bg"><div class="mini-bar-fill" style="width:${d.pct}%; background:${item.color};"></div></div>`;
+            const flexDiv = document.createElement('div');
+            flexDiv.className = 'flex-between';
+
+            const nameDiv = document.createElement('div');
+            nameDiv.className = 'name-text';
+            nameDiv.textContent = d.name + ' ';
+            const subSpan = document.createElement('span');
+            subSpan.style.cssText = "color:#999; font-size:11px;";
+            subSpan.textContent = d.sub;
+            nameDiv.appendChild(subSpan);
+
+            const valAreaDiv = document.createElement('div');
+            valAreaDiv.className = 'val-area';
+            const valTextDiv = document.createElement('div');
+            valTextDiv.className = 'val-text';
+            valTextDiv.textContent = d.valStr;
+            const pctTextDiv = document.createElement('div');
+            pctTextDiv.className = 'pct-text';
+            pctTextDiv.style.color = '#888';
+            pctTextDiv.textContent = `${d.pct}%`;
+            valAreaDiv.appendChild(valTextDiv);
+            valAreaDiv.appendChild(pctTextDiv);
+
+            flexDiv.appendChild(nameDiv);
+            flexDiv.appendChild(valAreaDiv);
+
+            const miniBarBg = document.createElement('div');
+            miniBarBg.className = 'mini-bar-bg';
+            const miniBarFill = document.createElement('div');
+            miniBarFill.className = 'mini-bar-fill';
+            miniBarFill.style.width = `${d.pct}%`;
+            miniBarFill.style.background = item.color;
+            miniBarBg.appendChild(miniBarFill);
+
+            dItem.appendChild(flexDiv);
+            dItem.appendChild(miniBarBg);
             detailBox.appendChild(dItem);
         });
 
