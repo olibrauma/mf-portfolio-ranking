@@ -29,6 +29,12 @@
     "browser_specific_settings": {
         "gecko": {
             "id": "mf-portfolio-ranking@olibrauma.com"
+        },
+        "gecko_android": {
+            "data_collection_permissions": {
+                "is_opt_in_required": false,
+                "is_data_collection_policy_required": false
+            }
         }
     }
 }
