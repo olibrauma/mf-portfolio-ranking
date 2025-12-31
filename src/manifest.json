@@ -16,6 +16,16 @@
             "run_at": "document_idle"
         }
     ],
+    "icons": {
+        "32": "icons/32.png",
+        "64": "icons/64.png",
+        "128": "icons/128.png"
+    },
+    "action": {
+        "default_icon": {
+            "32": "icons/32.png"
+        }
+    },
     "browser_specific_settings": {
         "gecko": {
             "id": "mf-portfolio-ranking@olibrauma.com"
